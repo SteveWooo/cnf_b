@@ -1,0 +1,26 @@
+{
+  "name": "cnf",
+  "version": "1.0.0",
+  "description": "Consensus is Not the Foundation",
+  "main": "Cnf.js",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevewooo/CNF.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stevewooo/CNF/issues"
+  },
+  "homepage": "https://github.com/stevewooo/CNF#readme",
+  "dependencies": {
+    "secp256k1": "^4.0.1"
+  }
+}

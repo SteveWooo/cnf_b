@@ -1,0 +1,14 @@
+{
+    "net": {
+        "localPrivateKey": "eaaacf1853802514fc71e1db48884d951670afbd6b53027fe2b44ae1f084bd41",
+        "localhost": "127.0.0.1",
+        "discoverUdpPort": 30002,
+        "connectionTcpServerPort": 30002,
+        "seed": [{
+            "nodeId" : "0489d63e0b366144e4f7c6b2e562177148dce9c797d5ccfa495b618675fc77c0af52f874f6fc4799547e0fedbd71ea33eda2c8a705af282c883448c92a2c14db74",
+            "ip" : "127.0.0.1",
+            "tcpport" : 30000,
+            "udpport" : 30000
+        }]
+    }
+}

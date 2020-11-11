@@ -1,0 +1,14 @@
+{
+    "net" : {
+        "localPrivateKey" : "c70c5dcc0958294b25d012e9334b06bd9c75cd3c95b300d84d4ddc0925458395",
+        "localhost" : "127.0.0.1",
+        "discoverUdpPort" : 40404,
+        "connectionTcpServerPort" : 40404,
+        "seed" : [{
+            "nodeId" : "04a7c9daed8c3ef277b57abb3b0b66f51b40053e58f3f084bc4a9b87092c3d7c5794fd8f209d4b43c0a6666de83193939e3c0afffe6d4febbd29288b73cb5a1623",
+            "ip" : "happykeke.com",
+            "tcpport" : 30000,
+            "udpport" : 30000
+        }]
+    }
+}
