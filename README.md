@@ -1,126 +1,147 @@
-# CNF.js - 共识算法不是前提
-###### 上手即用的区块链共识协议开发库✌️
-###### 一个烟酒生做的小玩具✈
-###### 👇👇👇👇👇
-###### （广大方班综合实验作业📚）
-## 安装
-### node.js
-```bash
-git clone https://github.com/stevewooo/cnf
-cd cnf
-npm i
+# CnF -- Meta Consensus
+
+Build a New Blockchain World By Meta Consensus.
+
+<!-- PROJECT SHIELDS -->
+
+[![Contributors][contributors-shield]][contributors-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![GPL License][license-shield]][license-url]
+
+<!-- PROJECT LOGO -->
+<br />
+
+<p align="center">
+  <a href="https://github.com/SteveWooo/cnf_2">
+    <img src="CnF-logo.png" alt="Logo" width="243" height="129">
+  </a>
+
+  <h3 align="center">"共识定制化"的区块链平台</h3>
+  <p align="center">
+    虚拟化共识多链的探索之旅
+  </p>
+</p>
+ 
+
+### 上手指南
+
+目前仅提供Mac和Centos上的运作Demo, 敬请期待！
+
+###### 开发前的配置要求
+
+Golang 1.16+
+
+1. 下载仓库
+
+```sh
+git clone https://github.com/SteveWooo/cnf_2.git
 ```
-## 部署
-### 快速开始
-```bash
-node example/mulNodes/startup.js -config example/mulNodes/config1.json # 启动节点1
-node example/mulNodes/startup.js -config example/mulNodes/config2.json # 启动节点2
+
+2. **运行！**
+
+```sh
+cd cnf_2/runtime
+bash run_demo.mac.sh
 ```
-## 文档
-### 配置文件
-参考 example/mulNodes/config1.json中的配置。
-##### 重要字段：
-1. 🔑localPrivateKey char(32) : 每个节点的唯一标示的生成密钥，请保证全局唯一配置
-2. 😁discoverUdpPort int: 节点发现服务的UDP端口，同一个容器中不可重复
-3. 🔗connectionTcpServerPort int : 节点连接时用的TCP端口，建议与udp端口保持一致
-4. 🌲seed array : 节点种子，启动节点的时候会主动尝试连接seed列表中的节点，然后再依赖节点发现服务，连接更多节点
-### 框架主类
+
+3. 打开基础操作面板
+
+http://localhost:9024/static
+
+### 使用示范
+
+###### 1. 部署一个共识机制
+
+在“基础区块浏览器”中，点击提交算法，按如下Demo填写
 ```javascript
-let cnf = new CNF();
-```
-返回一个cnf库实例，
-#### 参数
-无
-#### 返回
-返回一个库的实例化对象，里面包含各种接口
-___
+// 发布类型：create
+// 算法名称：test
+// 算法脚本：
 
-### 框架主类构建函数
-#### cnf.build();
-完成主类接口的各种初始化，包括全局变量初始化，socket初始化等等
-#### 参数
-无
-#### 返回
-Promise-object，一个promise构造函数，需要await或then来控制顺序。
-#### 示范
+exports.CallTest = function(params) {
+    MC_AddNewBlock(JSON.stringify(params))
+}
+
+// 创世区块：
+{}
+
+// 参与者节点：""
+```
+
+点击提交，等待共识
+
+###### 2. 查询业务区块
+
+在“业务算法区块浏览器”界面中，算法名称输入：test，然后查询区块。就会发现有一个区块啦~
+
+###### 3. 提交交易
+
+在“交易提交器界面中”
 ```javascript
-await cnf.build();
+// 算法名称：test
+// 调用函数名：CallTest
+// JSON参数：
+{
+  "Hello" : "World!",
+  "This" : "is the Second Block."
+}
+
 ```
+点击提交，所有节点同步接收该请求，并同时执行。
 
-___
+###### 其他Demo
 
-### 网络消息回调函数注册
+<a href="https://github.com/SteveWooo/testin">方班教学实验平台</a>
+里面我试着设计了一个共识算法，PoBR，结合业务逻辑的共识机制。
 
-#### CNF.netData.msg.registerMsgEvent()
+### 部署
 
-注册消息回调函数，主要响应p2p网络上的数据包给业务方使用。这里也是业务方进行共识协议开发的核心函数。
+程序主要通过命令行参数传入，由于目前还在实验阶段，暂时没对私钥做安全管理。
 
-#### 参数
-1. `netCallback` async 函数，p2p网络有数据包回来的时候就会调用这个函数，把数据放进data中。
+/runtime 文件夹下有相关的启动脚本，尤其是带Demo字样的，欢迎开发者们阅读并更改。
 
-#### 返回
-Promise-object ，一个promise响应函数，需要await或then来控制顺序。
+### 使用到的框架
 
-#### 示范
-```javascript
-await CNF.netData.msg.registerMsgEvent({
-    netCallback : async function(data){
-        console.log(data.msg);
-    }
-})
-```
-___
+- [levelDB fo Golang](github.com/syndtr/goleveldb)
+- [V8 for Golang](github.com/robertkrimen/otto)
+- [btcd](github.com/btcsuite/btcd)
 
-### 节点启动
-#### CNF.netData.node.startup();
+### 贡献者
 
-启动节点的发现服务，连接服务，数据转发与透传业务方的服务。
-#### 参数
-无
-#### 返回
-Promise-object ，一个promise响应函数，需要await或then来控制顺序。
+设计、开发者：**DeadFish🐡**
 
-#### 示范
-```javascript
-await CNF.netData.node.startup();
-```
-___
+指导老师：**[田志宏](https://baike.baidu.com/item/田志宏/50882780)**
 
-### 消息广播
+###### 如何参与开源项目
 
-#### CNF.netData.msg.brocast();
+Email Us: **stevewoo23@gmail.com** 
 
-广播消息给p2p全网节点
-#### 参数
-1. `message` String，需要给全网广播的JSON数据包，会在这个包会透传到网络消息回调函数的data.msg中。
-#### 返回
-Promise-object ，一个promise响应函数，需要await或then来控制顺序。
+### 作者
 
-#### 示范
-```javascript
-await CNF.netData.msg.brocast(JSON.stringify({
-    hello : 'world'
-}))
-```
+**DeadFish🐡**
 
-___
+### 版权说明
 
-### 消息发送
+该项目签署了 GPL 授权许可，详情请参阅 [LICENSE.txt](https://github.com/SteveWooo/cnf_2/blob/master/LICENSE)
 
-#### CNF.netData.msg.send();
+### 鸣谢
 
-把数据推到指定的socket上并发送出去，其中要求socket在本节点已经连接的节点池中。
-#### 参数
-1. `socket`  socket handle，节点池中的socket
-2. `message` String，需要发送的业务消息
-#### 返回
-Promise-object ，一个promise响应函数，需要await或then来控制顺序。
+广州大学方滨兴实验班、胡宁教授、姜誉教授、薛岳同学、李爽同学、邓锦禧大佬
 
-#### 示范
-```javascript
-await cnf.net.msg.send(socket, 'Hello world.');
-```
+& 文昕~
 
-## 贡献 & 致谢
-1. 广州大学方班🏫
-2. 死鱼姐姐👦
+<!-- links -->
+[your-project-path]:shaojintian/Best_README_template
+[contributors-shield]: https://img.shields.io/badge/%E5%BC%80%E5%8F%91%E8%80%85-DeadFish-green
+[contributors-url]: https://github.com/shaojintian/Best_README_template/graphs/contributors
+[stars-shield]: https://img.shields.io/badge/Star-0-yellow
+[stars-url]: https://github.com/shaojintian/Best_README_template/stargazers
+[issues-shield]: https://img.shields.io/badge/Issue-0-blue
+[issues-url]: https://img.shields.io/github/issues/shaojintian/Best_README_template.svg
+[license-shield]: https://img.shields.io/badge/License-GPL-green.svg?style=flat-square
+[license-url]: https://github.com/shaojintian/Best_README_template/blob/master/LICENSE.txt
+
+
+
+
