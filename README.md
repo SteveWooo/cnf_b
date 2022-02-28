@@ -1,4 +1,4 @@
-# CnF -- Meta Consensus
+# CnF -- Meta Consensus （利益关系，项目暂闭源中）
 
 Build a New Blockchain World By Meta Consensus.
 
